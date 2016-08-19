@@ -21,18 +21,17 @@ test = 0 #global scope
 outer()
 print 'global:', test
 
-# 'nonlocal' Example: how to use variable from outer scope in inner scope
+# 'global' - bind to variable in global scope
 def outer():
-    test = 1
-    def inner():
-        nonlocal test #user scope from line 26
-        test = 2 #changes outer scope value of test to 2
-        print 'inner:', test
-    
-    inner()
-    print 'outer:', test #outer scope
+    test = 1  # outer scope
 
-test = 0 #global scope
+    def inner():
+        global test
+        test = 2  # global scope
+        print 'inner:', test
+    inner()
+    print 'outer:', test
+
+test = 0  # global scope
 outer()
 print 'global:', test
-
